@@ -53,9 +53,11 @@ Installed MariaDB client:
 
 Code
 sudo yum install mariadb -y
+
 3. Connect to RDS
 Code
 mysql -u admin -p -h <RDS-ENDPOINT>
+
 4. Database Design
 Code
 CREATE DATABASE student_records;
@@ -73,11 +75,13 @@ CREATE TABLE CLOUD_PRACTITIONER (
   CertificationDate DATE,
   FOREIGN KEY (StudentID) REFERENCES RESTART(StudentID)
 );
+
 5. Data Management
 Inserted sample records and retrieved data using SQL queries:
 
 Code
 SELECT * FROM RESTART;
+
 6. SQL Join Operation
 Code
 SELECT
@@ -87,6 +91,7 @@ SELECT
 FROM RESTART R
 INNER JOIN CLOUD_PRACTITIONER C
 ON R.StudentID = C.StudentID;
+
 🎯 Key Skills Demonstrated
 AWS Cloud Infrastructure
 
@@ -104,6 +109,6 @@ Secure cloud database administration
 Successfully deployed a cloud-hosted relational database, configured secure EC2-to-RDS connectivity, designed normalized tables, inserted sample data, and executed SQL joins to retrieve meaningful insights.
 
 👤 Author
-Faith  
+Faith Felix Mbodi  
 Cloud Computing Practioner| AWS Learner | IT Student
 
