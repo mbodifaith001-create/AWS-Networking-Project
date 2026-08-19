@@ -1,20 +1,18 @@
 AWS RDS Database Deployment & SQL Management (Aurora/MySQL)
+
 Overview
+
 This project demonstrates how to deploy a fully managed relational database using Amazon RDS (Aurora/MySQL) and connect to it securely from an Amazon EC2 Linux instance. It includes database design, SQL operations, and relational joins to showcase cloud database administration skills.
+
 Features
 AWS RDS (Aurora/MySQL) deployment
-
 Secure EC2-to-RDS connectivity
-
 MariaDB/MySQL client installation
-
 Database schema design
-
 SQL data insertion & retrieval
-
 INNER JOIN operations
-
 VPC & Security Group configuration
+
 Architecture
 User
    │
@@ -28,6 +26,7 @@ MariaDB/MySQL Client
 Amazon RDS (Aurora/MySQL)
    │
 SQL Database
+
 Implementation Steps
 1. Provision RDS (Aurora/MySQL)
 Dev/Test template
@@ -39,6 +38,7 @@ General Purpose SSD
 Lab VPC
 
 Security Group configuration
+
 2. Configure Secure Connectivity
 Updated inbound rules to allow EC2 access
 
@@ -47,9 +47,11 @@ Connected to EC2 via SSH
 Installed MariaDB client:
 Code
 sudo yum install mariadb -y
+
 3. Connect to RDS
 Code
 mysql -u admin -p -h <RDS-ENDPOINT>
+
 4. Database Design
 Code
 CREATE DATABASE student_records;
@@ -66,11 +68,13 @@ CREATE TABLE CLOUD_PRACTITIONER (
   CertificationDate DATE,
   FOREIGN KEY (StudentID) REFERENCES RESTART(StudentID)
 );
+
 5. Data Management
 Inserted sample records and retrieved data using SQL queries:
 Code
 SELECT * FROM RESTART;
-6. SQL Join Operation
+
+7. SQL Join Operation
 Code
 SELECT
   R.StudentID,
