@@ -1,101 +1,105 @@
-# AWS-Database-Project
-📘 AWS RDS Database Deployment & SQL Management (Aurora/MySQL)
+🌐 AWS VPC Network Design & EC2 Web Server Deployment
 Overview
-This project demonstrates how to deploy a fully managed relational database using Amazon RDS (Aurora/MySQL) and connect to it securely from an Amazon EC2 Linux instance. It includes database design, SQL operations, and relational joins to showcase cloud database administration skills.
-
-🚀 Features
-AWS RDS (Aurora/MySQL) deployment
-Secure EC2-to-RDS connectivity
-MariaDB/MySQL client installation
-Database schema design
-SQL data insertion & retrieval
-INNER JOIN operations
-VPC & Security Group configuration
+This project demonstrates how to build a secure, multi‑AZ AWS Virtual Private Cloud (VPC) from scratch and deploy a functional Apache web server on an EC2 instance. The network includes public and private subnets, proper routing, NAT/IGW configuration, and a security‑hardened web server accessible over HTTP.
 
 🏗️ Architecture
-Code
-User
-   │
-   ▼
-SSH
-   │
-Amazon EC2 (Linux)
-   │
-MariaDB/MySQL Client
-   │
-Amazon RDS (Aurora/MySQL)
-   │
-SQL Database
+VPC
+CIDR: 10.0.0.0/16
+
+Name: Lab VPC
+
+Subnets
+Public Subnet 1: 10.0.0.0/24
+
+Private Subnet 1: 10.0.1.0/24
+
+Public Subnet 2: 10.0.2.0/24
+
+Private Subnet 2: 10.0.3.0/24
+
+Internet Connectivity
+Internet Gateway (IGW) → Public subnets
+
+NAT Gateway → Private subnets outbound access
+
+Route Tables
+Public Route Table → IGW
+
+Private Route Table → NAT Gateway
+
+Compute Layer
+EC2 Instance: Amazon Linux 2, t3.micro
+
+Subnet: Public Subnet 2
+
+Security Group: HTTP (80) allowed from 0.0.0.0/0
+
+User Data installs Apache + deploys sample app
 
 🔧 Implementation Steps
-1. Provision RDS (Aurora/MySQL)
-Dev/Test template
-db.t3.micro instance
-General Purpose SSD
-Lab VPC
-Security Group configuration
+1. VPC Foundation
+Created VPC: 10.0.0.0/16
 
-2. Configure Secure Connectivity
-Updated inbound rules to allow EC2 access
-Connected to EC2 via SSH
-Installed MariaDB client:
+Used VPC wizard to generate initial subnets, IGW, NAT, and route tables.
+
+2. Multi‑AZ Subnet Expansion
+Added:
+
+Public Subnet 2 → 10.0.2.0/24
+
+Private Subnet 2 → 10.0.3.0/24
+
+3. Routing Configuration
+Public Subnet 2 → Public Route Table
+
+Private Subnet 2 → Private Route Table
+
+Public → IGW
+
+Private → NAT Gateway
+
+4. Security Group Setup
+Inbound:
+
+HTTP (80) → Anywhere (0.0.0.0/0)
+
+All other traffic blocked by default.
+
+5. EC2 Web Server Deployment
+Launched EC2 with user data:
+
 Code
-sudo yum install mariadb -y
+#!/bin/bash
+yum install -y httpd mysql php
+wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1/267-lab-NF-build-vpc-web-server/s3/lab-app.zip
+unzip lab-app.zip -d /var/www/html/
+chkconfig httpd on
+service httpd start
+✅ Validation
+EC2 reached 2/2 status checks
 
-3. Connect to RDS
-Code
-mysql -u admin -p -h <RDS-ENDPOINT>
+Opened Public IPv4 DNS in browser
 
-4. Database Design
-Code
-CREATE DATABASE student_records;
-USE student_records;
+Web application loaded successfully over HTTP
 
-CREATE TABLE RESTART (
-  StudentID INT PRIMARY KEY,
-  StudentName VARCHAR(100),
-  RestartCity VARCHAR(100),
-  GraduationDate DATETIME
-);
+🎯 Skills Demonstrated
+VPC design & IPv4 subnetting
 
-CREATE TABLE CLOUD_PRACTITIONER (
-  StudentID INT,
-  CertificationDate DATE,
-  FOREIGN KEY (StudentID) REFERENCES RESTART(StudentID)
-);
+Public vs private subnet isolation
 
-5. Data Management
-Inserted sample records and retrieved data using SQL queries:
-Code
-SELECT * FROM RESTART;
+IGW vs NAT Gateway
 
-6. SQL Join Operation
-Code
-SELECT
-  R.StudentID,
-  R.StudentName,
-  C.CertificationDate
-FROM RESTART R
-INNER JOIN CLOUD_PRACTITIONER C
-ON R.StudentID = C.StudentID;
+Route table configuration
 
-🎯 Key Skills Demonstrated
-AWS Cloud Infrastructure
+Security Group design
 
-RDS & EC2 configuration
+EC2 launch configuration
 
-VPC networking & security groups
+User‑data automation
 
-SQL (DDL, DML, Joins)
-
-Linux command-line operations
-
-Secure cloud database administration
-
-📌 Project Outcome
-Successfully deployed a cloud-hosted relational database, configured secure EC2-to-RDS connectivity, designed normalized tables, inserted sample data, and executed SQL joins to retrieve meaningful insights.
+Linux + Apache web server setup
 
 👤 Author
-Faith Felix Mbodi  
-Cloud Computing Practioner| AWS Learner | IT Student
+Faith Felix Mbodi
+Cloud Computing Practioner | AWS Learner | IT Student
 
