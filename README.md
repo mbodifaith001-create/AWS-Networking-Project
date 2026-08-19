@@ -5,17 +5,11 @@ This project demonstrates how to deploy a fully managed relational database usin
 
 🚀 Features
 AWS RDS (Aurora/MySQL) deployment
-
 Secure EC2-to-RDS connectivity
-
 MariaDB/MySQL client installation
-
 Database schema design
-
 SQL data insertion & retrieval
-
 INNER JOIN operations
-
 VPC & Security Group configuration
 
 🏗️ Architecture
@@ -32,25 +26,19 @@ MariaDB/MySQL Client
 Amazon RDS (Aurora/MySQL)
    │
 SQL Database
+
 🔧 Implementation Steps
 1. Provision RDS (Aurora/MySQL)
 Dev/Test template
-
 db.t3.micro instance
-
 General Purpose SSD
-
 Lab VPC
-
 Security Group configuration
 
 2. Configure Secure Connectivity
 Updated inbound rules to allow EC2 access
-
 Connected to EC2 via SSH
-
 Installed MariaDB client:
-
 Code
 sudo yum install mariadb -y
 
@@ -78,7 +66,6 @@ CREATE TABLE CLOUD_PRACTITIONER (
 
 5. Data Management
 Inserted sample records and retrieved data using SQL queries:
-
 Code
 SELECT * FROM RESTART;
 
