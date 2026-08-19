@@ -1,5 +1,7 @@
 🌐 AWS VPC Network Design & EC2 Web Server Deployment
+
 Overview
+
 This project demonstrates how to build a secure, multi‑AZ AWS Virtual Private Cloud (VPC) from scratch and deploy a functional Apache web server on an EC2 instance. The network includes public and private subnets, proper routing, NAT/IGW configuration, and a security‑hardened web server accessible over HTTP.
 
 🏗️ Architecture
@@ -100,6 +102,8 @@ User‑data automation
 Linux + Apache web server setup
 
 👤 Author
+
 Faith Felix Mbodi
+
 Cloud Computing Practioner | AWS Learner | IT Student
 
